@@ -7,3 +7,6 @@ nele_mlops/
 │   └── train_model.py       # Where we will build the regressor later
 ├── requirements.txt
 └── README.md
+
+DATASET:
+VoiceBank_DEMAND_16k: https://www.kaggle.com/datasets/jweiqi/voicebank-demand-16k
