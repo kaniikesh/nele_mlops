@@ -68,7 +68,7 @@ if __name__ == "__main__":
     # --- 1. SET YOUR PATHS ---
     noisy_processed_dir = r"processed\noisy_train" 
     clean_processed_dir = r"processed\clean_train"
-    model_output_path = r"models\baseline_ridge_model_1.pkl"
+    model_output_path = r"models\baseline_ridge_model.pkl"
     
     # --- 2. RUN FULL PIPELINE ---
     # Setting max_files=None forces it to load the entire dataset
