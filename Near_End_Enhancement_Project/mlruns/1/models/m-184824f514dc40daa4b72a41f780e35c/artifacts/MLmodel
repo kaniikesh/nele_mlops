@@ -1,0 +1,23 @@
+artifact_path: file:C:/Users/Surface/OneDrive/Documents/Near_End_Enhancement_Project/mlruns/1/models/m-184824f514dc40daa4b72a41f780e35c/artifacts
+flavors:
+  python_function:
+    config:
+      device: null
+    data: data
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pytorch
+    pickle_module_name: mlflow.pytorch.pickle_module
+    python_version: 3.14.3
+  pytorch:
+    code: null
+    model_data: data
+    pytorch_version: 2.11.0+cpu
+mlflow_version: 3.10.1
+model_id: m-184824f514dc40daa4b72a41f780e35c
+model_size_bytes: 34317
+model_uuid: m-184824f514dc40daa4b72a41f780e35c
+prompts: null
+run_id: 65824b7bae684c7cae59dfc63fff2319
+utc_time_created: '2026-03-29 20:07:15.091785'
