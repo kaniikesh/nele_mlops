@@ -1,4 +1,4 @@
-tensorflow==2.19.0
+tensorflow-cpu
 keras==3.12.1
 numpy==2.0.2
 librosa==0.11.0
