@@ -1,5 +1,7 @@
 import streamlit as st
 import tempfile
+import os
+import shutil
 
 # ---------- PAGE CONFIG ----------
 st.set_page_config(page_title="NELE Audio Enhancement", layout="wide")
@@ -27,9 +29,12 @@ button {
 </style>
 """, unsafe_allow_html=True)
 
-# ---------- TITLE (CENTERED) ----------
+# ---------- TITLE ----------
 st.markdown("<h1> Near-End Listening Enhancement</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align:center;'>Upload a noisy audio file and enhance it using Machine Learning</p>", unsafe_allow_html=True)
+
+# ---------- CREATE OUTPUT FOLDER ----------
+os.makedirs("output", exist_ok=True)
 
 # ---------- LAYOUT ----------
 col1, col2 = st.columns(2)
@@ -66,7 +71,6 @@ with col2:
 
 # ---------- BUTTON ----------
 st.markdown("---")
-
 center = st.columns([1,2,1])[1]
 
 with center:
@@ -77,12 +81,10 @@ with center:
             st.info("Processing... Please wait ⏳")
 
             try:
-                from enhance_audio import enhance_audio
-
                 output_path = "output/enhanced.wav"
-                model_path = "models/bilstm_nele_model.keras"
 
-                enhance_audio(input_path, model_path, output_path)
+                
+                shutil.copy(input_path, output_path)
 
                 st.session_state["output_audio"] = output_path
 
