@@ -80,7 +80,7 @@ with center:
                 from enhance_audio import enhance_audio
 
                 output_path = "output/enhanced.wav"
-                model_path = "models/baseline_ridge_model.pkl"
+                model_path = "models/bilstm_nele_model.keras"
 
                 enhance_audio(input_path, model_path, output_path)
 
