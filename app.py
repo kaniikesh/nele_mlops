@@ -9,23 +9,36 @@ st.set_page_config(page_title="NELE Audio Enhancement", layout="wide")
 # ---------- DARK BLUE BACKGROUND ----------
 st.markdown("""
 <style>
+
+/* Background */
 .stApp {
     background-color: #0f172a;
+}
+
+/* Text */
+h1, h2, h3, p {
     color: white;
 }
 
-h1 {
-    text-align: center;
+/* Buttons (FIXED) */
+.stButton > button {
+    background-color: #2563eb;
     color: white;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: bold;
 }
 
-h2, h3, p {
-    color: white;
+/* Light mode fix */
+@media (prefers-color-scheme: light) {
+    .stApp {
+        background-color: #f9fafb;
+    }
+    h1, h2, h3, p {
+        color: black;
+    }
 }
 
-button {
-    border-radius: 8px !important;
-}
 </style>
 """, unsafe_allow_html=True)
 
@@ -58,7 +71,7 @@ with col1:
 with col2:
     st.subheader("🎧 Enhanced Audio (Output)")
 
-    if "output_audio" in st.session_state:
+    if "output_audio" in st.session_state and os.path.exists(st.session_state["output_audio"]):
         st.audio(st.session_state["output_audio"])
 
         with open(st.session_state["output_audio"], "rb") as f:
