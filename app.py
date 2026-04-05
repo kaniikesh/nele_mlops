@@ -71,37 +71,36 @@ with col1:
 with col2:
     st.subheader("🎧 Enhanced Audio (Output)")
 
-    if "output_audio" in st.session_state and os.path.exists(st.session_state["output_audio"]):
-        st.audio(st.session_state["output_audio"])
+    if "audio_bytes" in st.session_state:
+        st.audio(st.session_state["audio_bytes"])
 
-        with open(st.session_state["output_audio"], "rb") as f:
-            st.download_button(
-                label="Download Enhanced Audio",
-                data=f,
-                file_name="enhanced.wav",
-                mime="audio/wav"
-            )
+        st.download_button(
+            label="Download Enhanced Audio",
+            data=st.session_state["audio_bytes"],
+            file_name="enhanced.wav",
+            mime="audio/wav"
+        )
 
 # ---------- BUTTON ----------
-st.markdown("---")
-center = st.columns([1,2,1])[1]
+import io
 
-with center:
-    if st.button("Enhance Audio"):
-        if uploaded_file is None:
-            st.warning("Please upload file first!")
-        else:
-            st.info("Processing... Please wait ⏳")
+if enhance_clicked:
+    if uploaded_file is None:
+        st.warning("Please upload file first!")
+    else:
+        st.info("Processing... Please wait ⏳")
 
-            try:
-                output_path = "output/enhanced.wav"
+        try:
+            # Read uploaded audio bytes
+            audio_bytes = uploaded_file.read()
 
-                
-                shutil.copy(input_path, output_path)
+            # TEMPORARY PROCESS 
+            enhanced_bytes = audio_bytes
 
-                st.session_state["output_audio"] = output_path
+            # Store in session
+            st.session_state["audio_bytes"] = enhanced_bytes
 
-                st.success("Audio Enhanced Successfully!")
+            st.success("Audio Enhanced Successfully!")
 
-            except Exception as e:
-                st.error(f"Error: {e}")
+        except Exception as e:
+            st.error(f"Error: {e}")
