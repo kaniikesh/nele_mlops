@@ -20,4 +20,4 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           git remote add space https://rkaniii:$HF_TOKEN@huggingface.co/spaces/rkaniii/nele-audio-enhancer
-          git push --force space main
+          git push --force space HEAD:main
