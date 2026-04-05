@@ -114,7 +114,7 @@ def enhance_audio_bytes(audio_bytes):
 # UI
 # ==========================================
 st.title("🎧 Near-End Listening Enhancement")
-st.markdown("Upload a noisy audio file and enhance it using your BiLSTM model")
+st.markdown("Upload a noisy audio file and enhance it")
 
 col1, col2 = st.columns(2)
 
