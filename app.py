@@ -62,7 +62,7 @@ def load_model():
         raw_github_url = "https://github.com/kaniikesh/nele_mlops/raw/deployment/models/model.weights.h5"
         
         # Download the true binary file
-        weights_path = tf.keras.utils.get_file("model_weights_real.h5", origin=raw_github_url)
+        weights_path = tf.keras.utils.get_file("model_real.weights.h5", origin=raw_github_url)
         
     model.load_weights(weights_path)
     return model
