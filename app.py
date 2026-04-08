@@ -4,7 +4,7 @@ import librosa
 import soundfile as sf
 import tempfile
 import tensorflow as tf
-
+import os
 
 # ==========================================
 # CONFIG
@@ -31,17 +31,14 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==========================================
-# LOAD MODEL
+# LOAD MODEL (WITH STREAMLIT LFS FIX)
 # ==========================================
-
 @st.cache_resource
 def load_model():
     from tensorflow.keras.models import Sequential
     from tensorflow.keras.layers import Bidirectional, LSTM, Dense, Dropout, Input
-    import os
     
     # Re-declare your shapes from Colab
-    # Based on your error log: [None, 250, 257]
     FRAMES = 250 
     N_BINS = 257
     
@@ -55,19 +52,23 @@ def load_model():
         Dense(N_BINS)
     ])
     
-    # 2. Load just the weights (bypass the config deserialization error)
-    # Make sure you download 'model_weights.h5' from Colab and put it in your models/ folder
     weights_path = "models/model.weights.h5"
     
-    if not os.path.exists(weights_path):
-        st.error(f"Could not find weights at {weights_path}")
-        return None
+    # 2. Check if the file is missing OR if it's a tiny Git LFS text pointer (< 1000 bytes)
+    if not os.path.exists(weights_path) or os.path.getsize(weights_path) < 1000:
+        st.warning("Downloading heavy model weights... this will only happen once ⏳")
+        
+        # Direct raw link to the weights file on your GitHub deployment branch
+        raw_github_url = "https://github.com/kaniikesh/nele_mlops/raw/deployment/models/model.weights.h5"
+        
+        # Download the true binary file
+        weights_path = tf.keras.utils.get_file("model_weights_real.h5", origin=raw_github_url)
         
     model.load_weights(weights_path)
     return model
 
-
 model = load_model()
+
 # ==========================================
 # AUDIO ENHANCEMENT FUNCTION
 # ==========================================
@@ -140,7 +141,6 @@ if enhance_clicked:
     if uploaded_file is None:
         st.warning("Please upload a file first!")
     else:
-        # Changed st.info to a spinner so it disappears when done!
         with st.spinner("Processing... Please wait ⏳"):
             try:
                 enhanced_bytes = enhance_audio_bytes(input_bytes)

@@ -3,3 +3,4 @@ processed/
 raw/
 .vscode/
 output/
+app_local.py
