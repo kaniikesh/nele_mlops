@@ -56,8 +56,7 @@ def load_model():
     
     # 2. Check if the file is missing OR if it's a tiny Git LFS text pointer (< 1000 bytes)
     if not os.path.exists(weights_path) or os.path.getsize(weights_path) < 1000:
-        st.warning("Downloading heavy model weights... this will only happen once ⏳")
-        
+                
         # Direct raw link to the weights file on your GitHub deployment branch
         raw_github_url = "https://github.com/kaniikesh/nele_mlops/raw/deployment/models/model.weights.h5"
         
